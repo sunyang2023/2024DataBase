@@ -28,14 +28,19 @@ public class PrincipalDAO {
 
         return data;
     }
-
-    public void insert(int work_number, String name, String sex,String contact_way,int whid) {
+    //         field           type                     key     NULL  DEFAULT
+    //负责人工号 work_number     int                      PRI     NO    NULL
+    //姓名      name            varchar(100)                     NO    NULL
+    //性别      gender          enum('男','女','其他')            YES    NULL
+    //联系方式   contact_way     varchar(255)                     NO    NULL
+    //仓库编号   whid            int                              NO    NULL
+    public void insert(int worker_number, String name, String gender,String contact_way,int whid) {
         String sql = "insert into 负责人 values(?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, work_number);
+            ps.setInt(1, worker_number);
             ps.setString(2, name);
-            ps.setString(3, sex);
+            ps.setString(3, gender);
             ps.setString(4, contact_way);
             ps.setInt(5, whid);
             ps.execute();
@@ -46,7 +51,7 @@ public class PrincipalDAO {
     }
 
     public void delete(int whid) {
-        String sql = "delete from 负责人 where work_number=?";
+        String sql = "delete from 负责人 where worker_number=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, whid);
@@ -56,15 +61,15 @@ public class PrincipalDAO {
         }
     }
     // 更新负责人信息的方法
-    public void update(int work_number, String name, String sex, String contact_way, int whid) {
+    public void update(int worker_number, String name, String gender, String contact_way, int whid) {
         String sql = "update 负责人 set 姓名 = ?, 性别 = ?, 联系方式 = ?, 仓库编号 = ? where 负责人工号 = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, name);
-            ps.setString(2, sex);
+            ps.setString(2, gender);
             ps.setString(3, contact_way);
             ps.setInt(4, whid);
-            ps.setInt(5, work_number);
+            ps.setInt(5, worker_number);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
