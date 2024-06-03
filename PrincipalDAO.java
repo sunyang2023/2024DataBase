@@ -46,7 +46,7 @@ public class PrincipalDAO {
     }
 
     public void delete(int whid) {
-        String sql = "delete from 负责人 where whid=?";
+        String sql = "delete from 负责人 where work_number=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, whid);
